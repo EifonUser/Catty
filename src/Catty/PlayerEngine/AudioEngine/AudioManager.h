@@ -22,7 +22,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
-#import "SoundsTableViewController.h"
+//#import "SoundsTableViewController.h"
 
 //@protocol AVAudioPlayerDelegate;
 

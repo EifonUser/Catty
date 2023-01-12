@@ -125,7 +125,7 @@ class SRViewController: UIViewController, AVAudioRecorderDelegate {
     @objc func saveSound(sender: UIBarButtonItem) {
         recorder?.stop()
         if sound?.name == kLocalizedRecording {
-            delegate?.add(sound)
+            delegate?.addSound(sound)
         } else {
             recorder?.deleteRecording()
         }

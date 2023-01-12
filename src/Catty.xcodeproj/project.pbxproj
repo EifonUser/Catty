@@ -1322,7 +1322,6 @@
 		92FF314C1A24DEB300093DA7 /* CatrobatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FF31141A24DEB300093DA7 /* CatrobatTableViewController.m */; };
 		92FF314E1A24DEB300093DA7 /* LookImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FF311B1A24DEB300093DA7 /* LookImageViewController.m */; };
 		92FF314F1A24DEB300093DA7 /* LooksTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FF311D1A24DEB300093DA7 /* LooksTableViewController.m */; };
-		92FF31551A24DEB300093DA7 /* SoundsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FF312B1A24DEB300093DA7 /* SoundsTableViewController.m */; };
 		92FF31571A24DEB300093DA7 /* ObjectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FF312F1A24DEB300093DA7 /* ObjectTableViewController.m */; };
 		92FF31581A24DEB300093DA7 /* SceneTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FF31311A24DEB300093DA7 /* SceneTableViewController.m */; };
 		92FF315B1A24DEB300093DA7 /* ProjectDetailStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FF31381A24DEB300093DA7 /* ProjectDetailStoreViewController.m */; };
@@ -1802,6 +1801,7 @@
 		CAE3C79D1B49FABC00AFE9D7 /* CBSequenceVisitProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE3C79B1B49FABC00AFE9D7 /* CBSequenceVisitProtocol.swift */; };
 		CAE3E4EB1B4C509800CC88BD /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = CAE3E4E91B4C509800CC88BD /* test.png */; };
 		CAE3E4EC1B4C509800CC88BD /* test2.png in Resources */ = {isa = PBXBuildFile; fileRef = CAE3E4EA1B4C509800CC88BD /* test2.png */; };
+		CE1D96BE2970258D00D97047 /* SoundsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1D96BD2970258D00D97047 /* SoundsTableViewController.swift */; };
 		CE201D67293BC6E000E7DD06 /* SRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE201D66293BC6E000E7DD06 /* SRViewController.swift */; };
 		CE76D87729644F91001D7517 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE76D87529644F91001D7517 /* InfoPlist.strings */; };
 		CE76D8C52965DF3A001D7517 /* DownloadTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE76D8C42965DF3A001D7517 /* DownloadTabBarController.swift */; };
@@ -3694,8 +3694,6 @@
 		92FF311B1A24DEB300093DA7 /* LookImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookImageViewController.m; sourceTree = "<group>"; };
 		92FF311C1A24DEB300093DA7 /* LooksTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LooksTableViewController.h; sourceTree = "<group>"; };
 		92FF311D1A24DEB300093DA7 /* LooksTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LooksTableViewController.m; sourceTree = "<group>"; };
-		92FF312A1A24DEB300093DA7 /* SoundsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundsTableViewController.h; sourceTree = "<group>"; };
-		92FF312B1A24DEB300093DA7 /* SoundsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundsTableViewController.m; sourceTree = "<group>"; };
 		92FF312E1A24DEB300093DA7 /* ObjectTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectTableViewController.h; sourceTree = "<group>"; };
 		92FF312F1A24DEB300093DA7 /* ObjectTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectTableViewController.m; sourceTree = "<group>"; };
 		92FF31301A24DEB300093DA7 /* SceneTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneTableViewController.h; sourceTree = "<group>"; };
@@ -4456,6 +4454,7 @@
 		CC7AC0EC7C3FE7D0298ABB4B /* sl */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CC8375C29E5886620CED275A /* ja */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CD83AA3639A4C0DD990858AD /* ps */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.strings; name = ps; path = ps.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CE1D96BD2970258D00D97047 /* SoundsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundsTableViewController.swift; sourceTree = "<group>"; };
 		CE201D66293BC6E000E7DD06 /* SRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRViewController.swift; sourceTree = "<group>"; };
 		CE76D87629644F91001D7517 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CE76D87829644FCD001D7517 /* af */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = af; path = af.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -9231,8 +9230,7 @@
 		92FF31271A24DEB300093DA7 /* MaintainSounds */ = {
 			isa = PBXGroup;
 			children = (
-				92FF312A1A24DEB300093DA7 /* SoundsTableViewController.h */,
-				92FF312B1A24DEB300093DA7 /* SoundsTableViewController.m */,
+				CE1D96BD2970258D00D97047 /* SoundsTableViewController.swift */,
 				5936893B2021979A00FC3115 /* SoundsTableViewController+MediaLibrary.swift */,
 				97417A9A265284400079A2A2 /* SoundsTableViewController+SelectFile.swift */,
 				CE201D66293BC6E000E7DD06 /* SRViewController.swift */,
@@ -12796,6 +12794,7 @@
 				492E5961287FDF0A00357F09 /* ObjectWithIDVisibleFunction.swift in Sources */,
 				4CB2CFAE1D7ADA1D009F3034 /* SetColorBrick+Instruction.swift in Sources */,
 				188746B824DA914E003F5E81 /* ProjectManager.swift in Sources */,
+				CE1D96BE2970258D00D97047 /* SoundsTableViewController.swift in Sources */,
 				186AA33F2482DA65001E38FD /* PenDownBrickCell.swift in Sources */,
 				05E6801E255B5DAA00D1E295 /* EmbroideryProtocol.swift in Sources */,
 				AA74F0BF1BC05FCE00D1E954 /* PointToBrickCell.m in Sources */,
@@ -13321,7 +13320,6 @@
 				AA74F00B1BC05B5F00D1E954 /* PlaySoundBrick.m in Sources */,
 				1882475B24C8514300B01653 /* SetPenColorBrick+Instruction.swift in Sources */,
 				F4A2AFB92110D4A800C53234 /* LengthFunction.swift in Sources */,
-				92FF31551A24DEB300093DA7 /* SoundsTableViewController.m in Sources */,
 				F4E6E58A210DFECA00D86FE6 /* SqrtFunction.swift in Sources */,
 				F4E6E586210DFE0800D86FE6 /* LnFunction.swift in Sources */,
 				4CC147B1257A22D3001A93F9 /* LaunchArguments.swift in Sources */,

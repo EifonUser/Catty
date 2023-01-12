@@ -50,7 +50,7 @@
 #import "BrickCellVariableData.h"
 #import "BrickCellListData.h"
 #import "LooksTableViewController.h"
-#import "SoundsTableViewController.h"
+//#import "SoundsTableViewController.h"
 #import "SceneTableViewController.h"
 #import "ViewControllerDefines.h"
 #import "CBMutableCopyContext.h"
