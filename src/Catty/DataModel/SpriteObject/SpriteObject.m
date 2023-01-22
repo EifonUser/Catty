@@ -136,10 +136,9 @@
     return [fileManager sizeOfFileAtPath:path];
 }
 
-- (CGFloat)durationOfSound:(Sound*)sound
+- (NSString*)pathOfSound:(Sound*)sound
 {
-    NSString *path = [sound pathForScene:self.scene];
-    return [[AudioManager sharedAudioManager] durationOfSoundWithFilePath:path];
+   return [sound pathForScene:self.scene];
 }
 
 - (NSArray*)allLookNames

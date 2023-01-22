@@ -31,7 +31,7 @@ protocol SoundDelegate: NSObjectProtocol {
 }
 
 @objc(SoundsTableViewController)
-class SoundsTableViewController: BaseTableViewController, AVAudioPlayerDelegate, AudioManagerDelegate, SoundDelegate {
+class SoundsTableViewController: BaseTableViewController, SoundDelegate {
 
     private var useDetailCells = false
     private var currentPlayingSong: Sound?
@@ -78,14 +78,15 @@ class SoundsTableViewController: BaseTableViewController, AVAudioPlayerDelegate,
         super.viewWillAppear(animated)
         navigationController?.setToolbarHidden(false, animated: false)
         try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [])
+        NotificationCenter.default.addObserver(self, selector: #selector(audioDidFinishPlaying), name: .audioDidFinishPlaying, object: nil)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: .audioDidFinishPlaying, object: nil)
         super.viewWillDisappear(animated)
         currentPlayingSongCell = nil
         stopAllSounds()
         audioEngine.stop()
-
     }
 
     @objc override func playSceneAction(_ sender: Any) {
@@ -117,20 +118,15 @@ class SoundsTableViewController: BaseTableViewController, AVAudioPlayerDelegate,
     }
 
     func toggleDetailCellsMode() {
-        useDetailCells = !useDetailCells
-        let defaults = UserDefaults.standard
-        let showDetails = defaults.object(forKey: kUserDetailsShowDetailsKey) as? [String: Any]
-        var showDetailsMutable: [String: Any]
-        if showDetails == nil {
-            showDetailsMutable = [:]
-        } else {
-            showDetailsMutable = showDetails!
-        }
-        showDetailsMutable[kUserDetailsShowDetailsSoundsKey] = useDetailCells
-        defaults.set(showDetailsMutable, forKey: kUserDetailsShowDetailsKey)
-        defaults.synchronize()
-        stopAllSounds()
-        reloadData()
+    self.useDetailCells = !self.useDetailCells
+    let defaults = UserDefaults.standard
+    let showDetails = defaults.object(forKey: kUserDetailsShowDetailsKey) as? [String: Bool]
+    var showDetailsMutable = showDetails ?? [:]
+    showDetailsMutable[kUserDetailsShowDetailsSoundsKey] = self.useDetailCells
+    defaults.set(showDetailsMutable, forKey: kUserDetailsShowDetailsKey)
+    defaults.synchronize()
+    stopAllSounds()
+    reloadData()
     }
 
     func addSoundToObjectAction(_ s: Sound) {
@@ -183,7 +179,7 @@ class SoundsTableViewController: BaseTableViewController, AVAudioPlayerDelegate,
         hideLoadingView()
     }
 
-    func renameSoundAction(toName newSoundName: String, sound: Sound) {
+    @objc func renameSoundAction(toName newSoundName: String, sound: Sound) {
         if newSoundName == sound.name {
             return
         }
@@ -237,18 +233,18 @@ class SoundsTableViewController: BaseTableViewController, AVAudioPlayerDelegate,
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (object?.soundList.count)!
+        (object?.soundList.count)!
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let CellIdentifier = kImageCell
         let DetailCellIdentifier = kDetailImageCell
         var cell: UITableViewCell
-        if !useDetailCells {
+        if !self.useDetailCells {
             cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier, for: indexPath)
         } else {
             cell = tableView.dequeueReusableCell(withIdentifier: DetailCellIdentifier, for: indexPath)
@@ -291,7 +287,7 @@ class SoundsTableViewController: BaseTableViewController, AVAudioPlayerDelegate,
         tapped.numberOfTapsRequired = 1
         imageCell.iconImageView.addGestureRecognizer(tapped)
 
-        if useDetailCells, let detailCell = imageCell as? DarkBlueGradientImageDetailCell {
+        if self.useDetailCells, let detailCell = imageCell as? DarkBlueGradientImageDetailCell {
             detailCell.topLeftDetailLabel.textColor = UIColor.textTint
             detailCell.topLeftDetailLabel.text = "\(kLocalizedLength):"
             detailCell.topRightDetailLabel.textColor = UIColor.textTint
@@ -299,7 +295,8 @@ class SoundsTableViewController: BaseTableViewController, AVAudioPlayerDelegate,
             let number = self.dataCache[soundFromList?.fileName as Any] as? NSNumber
             var duration: CGFloat
             if number == nil {
-                duration = (self.object?.duration(of: sound))!
+                let soundPath = (self.object?.path(of: soundFromList))!
+                duration = AudioEngine.durationOfSoundWithFilePath(filePath: soundPath)
                 self.dataCache[soundFromList?.fileName as Any] = NSNumber(value: duration)
             } else {
                 duration = CGFloat(number!.floatValue)
@@ -309,7 +306,7 @@ class SoundsTableViewController: BaseTableViewController, AVAudioPlayerDelegate,
             detailCell.bottomLeftDetailLabel.textColor = .textTint
             detailCell.bottomLeftDetailLabel.text = String(format: "%@:", kLocalizedSize)
             detailCell.bottomRightDetailLabel.textColor = .textTint
-            let resultSize = (self.object?.fileSize(of: sound))!
+            let resultSize = (self.object?.fileSize(of: soundFromList))!
             let sizeOfSound = NSNumber(value: resultSize)
             detailCell.bottomRightDetailLabel.text = ByteCountFormatter.string(fromByteCount: Int64(sizeOfSound.uintValue), countStyle: .binary)
             return detailCell
@@ -323,7 +320,7 @@ class SoundsTableViewController: BaseTableViewController, AVAudioPlayerDelegate,
     }
 
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+        true
     }
 
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
@@ -355,8 +352,8 @@ class SoundsTableViewController: BaseTableViewController, AVAudioPlayerDelegate,
 
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let itemToMove = self.object?.soundList[sourceIndexPath.row]
-        self.object?.soundList.remove(sourceIndexPath.row)
-        self.object?.soundList.insert(itemToMove as Any, at: destinationIndexPath.row)
+        self.object?.soundList.removeObject(at: sourceIndexPath.row)
+        self.object?.soundList.insert(itemToMove!, at: destinationIndexPath.row)
         self.object?.scene.project?.saveToDisk(withNotification: false)
     }
 
@@ -370,7 +367,7 @@ class SoundsTableViewController: BaseTableViewController, AVAudioPlayerDelegate,
                 })
                 .addDefaultAction(title: kLocalizedRename, handler: {
                     let soundFromList = self.object?.soundList[indexPath.row] as? Sound
-                    Util.askUserForTextAndPerformAction(#selector(self.renameSoundActionToName(_:soundFromList:)), target: self, cancelAction: nil, withObject: sound, promptTitle: kLocalizedRenameSound, promptMessage: "\(kLocalizedSoundName):", promptValue: soundFromList?.name, promptPlaceholder: kLocalizedEnterYourSoundNameHere, minInputLength: UInt(kMinNumOfSoundNameCharacters), maxInputLength: UInt(kMaxNumOfSoundNameCharacters), invalidInputAlertMessage: kLocalizedInvalidSoundNameDescription)
+                    Util.askUser(forTextAndPerformAction: #selector(self.renameSoundAction(toName: soundFromList!.name, sound: soundFromList!)), target: self, cancelAction: nil, with: soundFromList!, promptTitle: kLocalizedRenameSound, promptMessage: "\(kLocalizedSoundName):", promptValue: soundFromList?.name, promptPlaceholder: kLocalizedEnterYourSoundNameHere, minInputLength: UInt(kMinNumOfSoundNameCharacters), maxInputLength: UInt(kMaxNumOfSoundNameCharacters), invalidInputAlertMessage: kLocalizedInvalidSoundNameDescription)
                 })
                 .build()
                 .viewWillDisappear({
@@ -395,7 +392,7 @@ class SoundsTableViewController: BaseTableViewController, AVAudioPlayerDelegate,
     @objc func playSound(_ sender: Any) {
         guard let gesture = sender as? UITapGestureRecognizer, gesture.view is UIImageView else { return }
         let imageView = gesture.view as! UIImageView
-        let position = imageView.convert(CGPointZero, to: self.tableView)
+        let position = imageView.convert(CGPoint.zero, to: self.tableView)
         guard let indexPath = self.tableView.indexPathForRow(at: position), let cell = self.tableView.cellForRow(at: indexPath) as? CatrobatImageCell else { return }
         playSound(imageCell: cell as! (UITableViewCell & CatrobatImageCell), andIndexPath: indexPath)
     }
@@ -422,92 +419,48 @@ class SoundsTableViewController: BaseTableViewController, AVAudioPlayerDelegate,
         queue.async {
             objc_sync_enter(self)
             defer { objc_sync_exit(self) }
-            AudioManager.shared().stopAllSounds()
-            //self.audioEngine.stopAllAudioPlayers()
+            //AudioManager.shared().stopAllSounds()
+            self.audioEngine.stopAllAudioPlayers()
             if isPlaying! {
                 return
             }
-            //guard let fileName = soundFromList?.fileName else { return }
-            //guard let dirPath = self.object?.scene.soundsPath() else { return }
-
-            //self.audioEngine.playSound(fileName: fileName, key: (self.object?.name)!, filePath: dirPath, expectation: nil)
-
             guard let fileName = soundFromList?.fileName else { return }
-            let am = AudioManager.shared()
-            let isPlayable = am?.playSound(withFileName: fileName, andKey: (self.object?.name)!, atFilePath: self.object?.scene.soundsPath(), delegate: self)
-            //if isPlayable! {
-            //    return
-            //}
-            //DispatchQueue.main.sync {
-            // Util.alert(text: kLocalizedUnableToPlaySoundDescription)
-            // self.stopAllSounds()
-            //}
+            guard let dirPath = self.object?.scene.soundsPath() else { return }
+
+            self.audioEngine.playSound(fileName: fileName, key: (self.object?.name)!, filePath: dirPath, expectation: nil)
         }
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return TableUtil.heightForImageCell()
+        TableUtil.heightForImageCell()
     }
 
-    func audioItemDidFinishPlaying(_ notification: Notification) {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: notification.object)
-        if (currentPlayingSong == nil) || (currentPlayingSongCell == nil) {
+    @objc func audioDidFinishPlaying() {
+        print("--completionhandler--")
+        guard let currentPlayingSong = self.currentPlayingSong, let currentPlayingSongCell = self.currentPlayingSongCell else {
             return
         }
 
         objc_sync_enter(self)
-        defer { objc_sync_exit(self) }
-        let tmpCurrentPlayingSong = self.currentPlayingSong
-        let tmpCurrentPlayingSongCell = self.currentPlayingSongCell
-        self.currentPlayingSong?.playing = false
+        currentPlayingSong.playing = false
         self.currentPlayingSong = nil
         self.currentPlayingSongCell = nil
 
         let playIconName = "ic_media_play"
         let imageCache = RuntimeImageCache.shared()
-        let image = imageCache?.cachedImage(forName: playIconName)
-
-        if image == nil {
-            imageCache?.loadImage(withName: playIconName, onCompletion: { img in
-                objc_sync_enter(self)
-                defer { objc_sync_exit(self) }
-                if (tmpCurrentPlayingSong != self.currentPlayingSong) && !(tmpCurrentPlayingSongCell === self.currentPlayingSongCell) {
-                    tmpCurrentPlayingSongCell?.iconImageView.image = img
-                }
-            })
+        if let image = imageCache?.cachedImage(forName: playIconName) {
+            currentPlayingSongCell.iconImageView.image = image
         } else {
-            tmpCurrentPlayingSongCell?.iconImageView.image = image
-        }
-    }
-
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        if (flag == false) || (currentPlayingSong == nil) || (currentPlayingSongCell == nil) {
-            return
-        }
-
-        objc_sync_enter(self)
-        defer { objc_sync_exit(self) }
-        let currentPlayingSong = self.currentPlayingSong
-        let currentPlayingSongCell = self.currentPlayingSongCell
-        self.currentPlayingSong?.playing = false
-        self.currentPlayingSong = nil
-        self.currentPlayingSongCell = nil
-
-        let playIconName = "ic_media_play"
-        let imageCache = RuntimeImageCache.shared()
-        var image = imageCache?.cachedImage(forName: playIconName)
-
-        if image == nil {
-            imageCache?.loadImage(withName: playIconName, onCompletion: { img in
+            imageCache?.loadImage(withName: playIconName) { img in
+                // check if user tapped again on thissong in the meantime...
                 objc_sync_enter(self)
-                defer { objc_sync_exit(self) }
                 if (currentPlayingSong != self.currentPlayingSong) && !(currentPlayingSongCell === self.currentPlayingSongCell) {
-                    currentPlayingSongCell?.iconImageView.image = img
+                    currentPlayingSongCell.iconImageView.image = img
                 }
-            })
-        } else {
-            currentPlayingSongCell?.iconImageView.image = image
+                objc_sync_exit(self)
+            }
         }
+        objc_sync_exit(self)
     }
 
     override func exitEditingMode() {
@@ -518,8 +471,7 @@ class SoundsTableViewController: BaseTableViewController, AVAudioPlayerDelegate,
     // MARK: - Helper Methods
 
     func stopAllSounds() {
-        AudioManager.shared().stopAllSounds()
-        //audioEngine.stopAllAudioPlayers()
+        audioEngine.stopAllAudioPlayers()
         if let currentPlayingSongCell = currentPlayingSongCell {
             currentPlayingSongCell.iconImageView.image = UIImage(named: "ic_media_play")
         }
@@ -614,7 +566,10 @@ class SoundsTableViewController: BaseTableViewController, AVAudioPlayerDelegate,
         }
     }
 
+
     func addSound(_ sound: Sound?) {
+        self.audioEngine.stopAllAudioPlayers()
+        self.audioEngine.stop()
         if isAllowed {
             let recording = sound! as Sound
             let fileManager = FileManager.default
@@ -631,6 +586,7 @@ class SoundsTableViewController: BaseTableViewController, AVAudioPlayerDelegate,
         if let afterSafeBlock = afterSafeBlock {
             afterSafeBlock(nil)
         }
+        audioEngine.start()
         reloadData()
     }
 

@@ -37,5 +37,4 @@ class StandardAudioPlayerFactory: AudioPlayerFactory {
 
         return audioPlayer
     }
-
 }

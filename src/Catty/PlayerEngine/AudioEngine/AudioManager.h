@@ -40,7 +40,7 @@
 
 + (instancetype)sharedAudioManager;
 
-- (BOOL)playSoundWithFileName:(NSString*)fileName
+/*- (BOOL)playSoundWithFileName:(NSString*)fileName
                        andKey:(NSString*)key
                    atFilePath:(NSString*)filePath
                      delegate:(id<AudioManagerDelegate>) delegate;
@@ -51,6 +51,6 @@
 - (void)stopAllSounds;
 - (void)pauseAllSounds;
 - (void)resumeAllSounds;
-- (CGFloat)durationOfSoundWithFilePath:(NSString*)filePath;
+- (CGFloat)durationOfSoundWithFilePath:(NSString*)filePath;*/
 
 @end

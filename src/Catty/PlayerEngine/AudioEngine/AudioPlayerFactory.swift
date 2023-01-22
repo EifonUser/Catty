@@ -23,5 +23,4 @@
 protocol AudioPlayerFactory {
 
     func createAudioPlayer(fileName: String, filePath: String) -> AudioPlayer?
-
 }

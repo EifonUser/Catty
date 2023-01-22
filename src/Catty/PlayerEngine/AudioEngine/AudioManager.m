@@ -36,7 +36,7 @@
 
 @implementation AudioManager
 
-+ (instancetype)sharedAudioManager
+/*+ (instancetype)sharedAudioManager
 {
     static AudioManager *_sharedCattyAudioManager = nil;
     static dispatch_once_t onceToken;
@@ -177,6 +177,6 @@
     AVAudioPlayer* avAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:filePath]
                                                                           error:&error];
     return (CGFloat)avAudioPlayer.duration;
-}
+}*/
 
 @end

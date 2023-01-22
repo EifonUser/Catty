@@ -23,6 +23,15 @@
 import AudioKit
 import Foundation
 
+extension Notification.Name {
+    static let audioDidFinishPlaying = Notification.Name("audioDidFinishPlaying")
+
+}
+
+@objc extension NSNotification {
+    public static let purchaseDidFinish = Notification.Name.audioDidFinishPlaying
+}
+
 class AudioPlayer: NSDiscardableContent {
     var player: AudioKit.AudioPlayer
     var outputMixer: AudioKit.Mixer?
@@ -55,7 +64,7 @@ class AudioPlayer: NSDiscardableContent {
         }
 
         playingQueue.sync {
-            soundCompletionHandler()
+            //soundCompletionHandler()
             if !self.isDiscarded {
                 if self.isPlaying {
                     player.stop()
@@ -67,7 +76,7 @@ class AudioPlayer: NSDiscardableContent {
     }
 
     func stop() {
-        soundCompletionHandler()
+        //soundCompletionHandler()
         player.stop()
     }
 
@@ -110,6 +119,7 @@ class AudioPlayer: NSDiscardableContent {
     }
 
     private func standardSoundCompletionHandler() {
+        NotificationCenter.default.post(name: .audioDidFinishPlaying, object: nil)
         if let expectation = self.playerIsFinishedExpectation {
             expectation.fulfill()
             playerIsFinishedExpectation = nil

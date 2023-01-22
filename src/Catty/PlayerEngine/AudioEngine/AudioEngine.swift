@@ -162,4 +162,12 @@ import Foundation
         }
         return subtrees[key]!
     }
+
+    @objc class func durationOfSoundWithFilePath(filePath: String) -> CGFloat {
+        let audioURL = URL(fileURLWithPath: filePath)
+        let audioAsset = AVURLAsset(url: audioURL)
+        let audioDuration = audioAsset.duration
+        return CGFloat(CMTimeGetSeconds(audioDuration))
+    }
+
 }

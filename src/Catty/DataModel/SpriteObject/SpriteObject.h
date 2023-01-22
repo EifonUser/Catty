@@ -54,7 +54,7 @@
 - (NSUInteger)fileSizeOfLook:(Look*)look;
 - (CGSize)dimensionsOfLook:(Look*)look;
 - (NSUInteger)fileSizeOfSound:(Sound*)sound;
-- (CGFloat)durationOfSound:(Sound*)sound;
+- (NSString*)pathOfSound:(Sound*)sound;
 - (NSArray*)allLookNames;
 - (NSArray*)allSoundNames;
 - (NSUInteger)referenceCountForLook:(NSString*)fileName;
