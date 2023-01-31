@@ -22,6 +22,7 @@
 
 import AVFoundation
 import UIKit
+import AudioKit
 
 @objc(SRViewController)
 class SRViewController: UIViewController, AVAudioRecorderDelegate {
@@ -35,10 +36,12 @@ class SRViewController: UIViewController, AVAudioRecorderDelegate {
     private var recorder: AVAudioRecorder?
     private var session: AVAudioSession?
     private var isSaved = false
+    private var engine = AudioEngine()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        //engine.start()
         let save = UIBarButtonItem(
             title: "Done", style: .done, target: self, action: #selector(saveSound(sender:)))
         navigationController?.isToolbarHidden = true
@@ -111,11 +114,15 @@ class SRViewController: UIViewController, AVAudioRecorderDelegate {
             } catch {
                 debugPrint(error)
             }
-
+            engine.startLoudnessRecorder()
             recorder?.record(forDuration: (Double(CBFileManager.shared().freeDiskspace()) / 1024) / 256.0)
             sound?.name = kLocalizedRecording
 
         } else {
+            let rawValueConverted = engine.loudness()
+            print("Raw Value:")
+            print(rawValueConverted)
+            engine.stopLoudnessRecorder()
             recorder?.pause()
             timerLabel.pause()
             recordButton.isSelected = false

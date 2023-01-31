@@ -512,7 +512,6 @@
 		4C0F9FD9204BD3D500E71B2D /* RepeatUntilBrickTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0F9FD8204BD3D500E71B2D /* RepeatUntilBrickTests.swift */; };
 		4C11795120AEBE38006C6E32 /* LongitudeSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C11795020AEBE38006C6E32 /* LongitudeSensor.swift */; };
 		4C11795420AEC36D006C6E32 /* ProtocolConformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C11795320AEC36D006C6E32 /* ProtocolConformance.swift */; };
-		4C1329041CD9259900F16E48 /* AudioManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1329031CD9259900F16E48 /* AudioManagerTests.swift */; };
 		4C15FE7F1D168C0D009C1A2B /* transparency_rgb.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C15FE7E1D168C0D009C1A2B /* transparency_rgb.png */; };
 		4C1A596323FD9E79001A78D2 /* SettingsTableViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1A596023FD9E79001A78D2 /* SettingsTableViewControllerTests.swift */; };
 		4C1A596823FE9997001A78D2 /* CrashlyticsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1A596723FE9997001A78D2 /* CrashlyticsMock.swift */; };
@@ -1803,6 +1802,7 @@
 		CAE3E4EC1B4C509800CC88BD /* test2.png in Resources */ = {isa = PBXBuildFile; fileRef = CAE3E4EA1B4C509800CC88BD /* test2.png */; };
 		CE1D96BE2970258D00D97047 /* SoundsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1D96BD2970258D00D97047 /* SoundsTableViewController.swift */; };
 		CE201D67293BC6E000E7DD06 /* SRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE201D66293BC6E000E7DD06 /* SRViewController.swift */; };
+		CE619A022981A8910024D5BF /* test_audio.m4a in Resources */ = {isa = PBXBuildFile; fileRef = CE619A012981A8910024D5BF /* test_audio.m4a */; };
 		CE76D87729644F91001D7517 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE76D87529644F91001D7517 /* InfoPlist.strings */; };
 		CE76D8C52965DF3A001D7517 /* DownloadTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE76D8C42965DF3A001D7517 /* DownloadTabBarController.swift */; };
 		D30359E624445ABE006688F5 /* GoToBrick+CBXMLHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = D30359E524445ABE006688F5 /* GoToBrick+CBXMLHandler.m */; };
@@ -2671,7 +2671,6 @@
 		4C0F9FD8204BD3D500E71B2D /* RepeatUntilBrickTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepeatUntilBrickTests.swift; sourceTree = "<group>"; };
 		4C11795020AEBE38006C6E32 /* LongitudeSensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongitudeSensor.swift; sourceTree = "<group>"; };
 		4C11795320AEC36D006C6E32 /* ProtocolConformance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolConformance.swift; sourceTree = "<group>"; };
-		4C1329031CD9259900F16E48 /* AudioManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioManagerTests.swift; sourceTree = "<group>"; };
 		4C15FE7E1D168C0D009C1A2B /* transparency_rgb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = transparency_rgb.png; path = CattyTests/Resources/Images/transparency_rgb.png; sourceTree = SOURCE_ROOT; };
 		4C1A596023FD9E79001A78D2 /* SettingsTableViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewControllerTests.swift; sourceTree = "<group>"; };
 		4C1A596723FE9997001A78D2 /* CrashlyticsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashlyticsMock.swift; sourceTree = "<group>"; };
@@ -4456,6 +4455,7 @@
 		CD83AA3639A4C0DD990858AD /* ps */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.strings; name = ps; path = ps.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CE1D96BD2970258D00D97047 /* SoundsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundsTableViewController.swift; sourceTree = "<group>"; };
 		CE201D66293BC6E000E7DD06 /* SRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRViewController.swift; sourceTree = "<group>"; };
+		CE619A012981A8910024D5BF /* test_audio.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = test_audio.m4a; sourceTree = "<group>"; };
 		CE76D87629644F91001D7517 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CE76D87829644FCD001D7517 /* af */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = af; path = af.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CE76D87929644FD0001D7517 /* ak */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ak; path = ak.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -9490,7 +9490,7 @@
 		9E22CC902323FD0B00BA4CBA /* UnitTests */ = {
 			isa = PBXGroup;
 			children = (
-				4C1329031CD9259900F16E48 /* AudioManagerTests.swift */,
+				CE619A012981A8910024D5BF /* test_audio.m4a */,
 				9E0F740822B5179C0030CD89 /* AudioSubtreeTests.swift */,
 				9E1BB3C922BE4EC200CBC0B6 /* AudioEngineTests.swift */,
 				9E22655E22BFB3FC00898052 /* AudioPlayerTests.swift */,
@@ -11868,6 +11868,7 @@
 				2ED41804241120AF00AFE2FD /* Pong_Starter_096.xml in Resources */,
 				E5BEC73B26AAEB160063D7F0 /* Sensors_0998.xml in Resources */,
 				7B144F1D28FDCE3500C4A300 /* StoreProjectDownloader.fetchMostDownloadedProjects.fail.parse.json in Resources */,
+				CE619A022981A8910024D5BF /* test_audio.m4a in Resources */,
 				2ED417DB241120AF00AFE2FD /* Airplane_with_shadow_093.xml in Resources */,
 				2ED41861241120B000AFE2FD /* ValidProjectAllBricks093.xml in Resources */,
 				2ED41880241120B000AFE2FD /* DeleteItemOfUserListBrick0991.xml in Resources */,
@@ -12457,7 +12458,6 @@
 				49358BC927DB3A37005F96B4 /* VNFaceObservationMock.swift in Sources */,
 				4C6FE176212D2D2E0067B7D5 /* LetterFunctionTest.swift in Sources */,
 				4CEB22511B95E47500B3BE2F /* BrickMoveManagerRepeatTests.m in Sources */,
-				4C1329041CD9259900F16E48 /* AudioManagerTests.swift in Sources */,
 				4C2CBB5A25A5AA8400C1C143 /* XMLParserTests0992.swift in Sources */,
 				4C822667213FA7A400F3D750 /* LocationAccuracySensorTest.swift in Sources */,
 				4C822677213FA7A400F3D750 /* RotationSensorTest.swift in Sources */,

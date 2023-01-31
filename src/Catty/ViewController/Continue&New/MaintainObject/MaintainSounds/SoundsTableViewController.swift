@@ -566,7 +566,6 @@ class SoundsTableViewController: BaseTableViewController, SoundDelegate {
         }
     }
 
-
     func addSound(_ sound: Sound?) {
         self.audioEngine.stopAllAudioPlayers()
         self.audioEngine.stop()

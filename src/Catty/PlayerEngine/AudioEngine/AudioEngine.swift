@@ -29,6 +29,16 @@ import Foundation
     var engine = AudioKit.AudioEngine()
     var engineOutputMixer = AudioKit.Mixer()
 
+    var loudnessEngine = AVAudioEngine()
+    var loudnessTimer: Timer!
+    var dbSamples: [Double] = []
+    var isRecording = false
+    var inputNode: AVAudioInputNode!
+    var recordingFormat: AVAudioFormat!
+    //var recorder: AVAudioRecorder!
+    //var loudnessTimer: Timer!
+    //var loudnessInDecibels: NSNumber?
+
     var audioEngineHelper = AudioEngineHelper()
     var speechSynth = SpeechSynthesizer()
 
@@ -40,6 +50,7 @@ import Foundation
     init(audioPlayerFactory: AudioPlayerFactory = StandardAudioPlayerFactory()) {
         self.audioPlayerFactory = audioPlayerFactory
         self.engine.output = self.engineOutputMixer
+
         super.init()
     }
 
